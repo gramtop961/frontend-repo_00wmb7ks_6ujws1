@@ -1,47 +1,97 @@
-import { Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Spline from '@splinetool/react-spline';
+import { Wand2, Star } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-fuchsia-50" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <section className="relative min-h-[90vh] overflow-hidden bg-white">
+      {/* Soft animated video background */}
+      <div className="absolute inset-0 opacity-70">
+        <video
+          className="h-full w-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="https://images.unsplash.com/photo-1496302662116-35cc4f36df92?q=80&w=1200&auto=format&fit=crop"
+        >
+          <source src="https://cdn.coverr.co/videos/coverr-abstract-particles-4569/1080p.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      {/* Warm gradient overlays */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/90" />
+      <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-[720px] w-[720px] rounded-full bg-[radial-gradient(circle_at_center,rgba(124,58,237,0.25),rgba(249,115,22,0.15)_60%,transparent_70%)] blur-2xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-medium mb-4">
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-medium mb-4"
+            >
               <Star size={14} />
-              Curated prompts from top creators
-            </div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
-              Find the perfect prompt for any task
-            </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              Browse high-quality prompts for chat, coding, marketing, design, and more. Save time and get better results instantly.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href="#catalog" className="px-5 py-3 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors">Explore Catalog</a>
-              <a href="#" className="px-5 py-3 rounded-lg border border-gray-200 text-gray-700 font-medium hover:border-gray-300 transition-colors">Sell Your Prompts</a>
-            </div>
-          </div>
-          <div className="relative">
-            <div className="aspect-[4/3] rounded-2xl bg-gradient-to-tr from-indigo-500 via-fuchsia-500 to-amber-400 opacity-90" />
-            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-4 p-4">
-              {['Code Review Pro', 'Marketing Angle Wizard', 'Logo Ideas Booster', 'Blog Outline Guru'].map((name, i) => (
-                <div key={i} className="rounded-xl bg-white/80 backdrop-blur border border-white/60 shadow-sm p-4 flex flex-col justify-between">
-                  <div>
-                    <p className="text-sm text-gray-500">Popular</p>
-                    <h3 className="font-semibold text-gray-900">{name}</h3>
-                  </div>
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="flex items-center gap-1 text-amber-500">
-                      {Array.from({ length: 5 }).map((_, j) => (
-                        <Star key={j} size={14} fill="#f59e0b" stroke="#f59e0b" />
-                      ))}
-                    </div>
-                    <span className="text-sm font-semibold text-gray-900">$6.99</span>
-                  </div>
-                </div>
+              Hand-picked prompts that feel magical
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.05 }}
+              className="text-4xl sm:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight"
+            >
+              Create more with warm, inspiring AI prompts
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="mt-4 text-lg text-gray-700"
+            >
+              A cozy home for creators. Explore animated, living examples and discover prompts that spark better work.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="mt-6 flex flex-wrap gap-3"
+            >
+              <a href="#marketplace" className="px-5 py-3 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors inline-flex items-center gap-2">
+                <Wand2 size={18} /> Explore Marketplace
+              </a>
+              <a href="#learn-more" className="px-5 py-3 rounded-lg border border-gray-200 text-gray-700 font-medium hover:border-gray-300 transition-colors">
+                Learn more
+              </a>
+            </motion.div>
+
+            {/* Floating badges */}
+            <div className="mt-10 flex flex-wrap gap-3">
+              {[
+                'Marketing Boosters',
+                'Coding Assist',
+                'Design Spark',
+                'Writing Flow',
+              ].map((label, i) => (
+                <motion.span
+                  key={label}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + i * 0.05 }}
+                  className="px-3 py-1.5 rounded-full bg-white/70 backdrop-blur border border-white/60 shadow-sm text-sm text-gray-700"
+                >
+                  {label}
+                </motion.span>
               ))}
             </div>
+          </div>
+
+          {/* Spline canvas */}
+          <div className="relative h-[460px] sm:h-[520px] lg:h-[600px] rounded-3xl overflow-hidden shadow-lg bg-white/60">
+            <Spline scene="https://prod.spline.design/4cHQr84zOGAHOehh/scene.splinecode" style={{ width: '100%', height: '100%' }} />
           </div>
         </div>
       </div>
